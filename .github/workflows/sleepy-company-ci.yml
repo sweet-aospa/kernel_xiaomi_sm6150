@@ -2,18 +2,18 @@ name: Sleepy Company CI!
 on:
   workflow_dispatch:
     inputs:
-        DEPLOY_DEVICE_TYPE:
+      DEPLOY_DEVICE_TYPE:
         description: 'Deploy Device Type (COURBET/DAVINCI/PHOENIX/SWEET)'
         required: true
-        DEPLOY_TAG_TYPE:
+      DEPLOY_TAG_TYPE:
         description: 'Deploy Kernel version tag (example: v1 or v2)'
         required: true
-
-      env:
-         CHATID: ${{ secrets.CHAT_ID }}
-         API_BOT: ${{ secrets.BOT_API }}
-         DEVICE_TYPE: ${{ github.event.inputs.DEPLOY_DEVICE_TYPE }}
-         KERNEL_VERSION_TAG: ${{ github.event.inputs.DEPLOY_TAG_TYPE }}
+        
+env:
+  CHATID: ${{ secrets.CHAT_ID }}
+  API_BOT: ${{ secrets.BOT_API }}
+  DEVICE_TYPE: ${{ github.event.inputs.DEPLOY_DEVICE_TYPE }}
+  KERNEL_VERSION_TAG: ${{ github.event.inputs.DEPLOY_TAG_TYPE }}
 
 jobs:
   SLEEPYCI:
@@ -34,10 +34,10 @@ jobs:
           ca-certificates python3 python2 binutils \
           binutils-aarch64-linux-gnu binutils-arm-linux-gnueabi
 
-       - name: Export Vars
-         run: |
-              if [[ ${DEVICE_TYPE} == "${{ github.event.inputs.DEPLOY_DEVICE_TYPE }}" ]]; then echo "DEVICE_TYPE=${{ github.event.inputs.DEPLOY_DEVICE_TYPE }}"  >> $GITHUB_ENV;fi
-              if [[ ${KERNEL_VERSION_TAG} == "${{ github.event.inputs.DEPLOY_TAG_TYPE }}" ]]; then echo "KERNEL_TAG=${{ github.event.inputs.DEPLOY_TAG_TYPE }}"  >> $GITHUB_ENV;fi
+    - name: Export Vars
+      run: |
+          if [[ ${DEVICE_TYPE} == "${{ github.event.inputs.DEPLOY_DEVICE_TYPE }}" ]]; then echo "DEVICE_TYPE=${{ github.event.inputs.DEPLOY_DEVICE_TYPE }}"  >> $GITHUB_ENV;fi
+          if [[ ${KERNEL_VERSION_TAG} == "${{ github.event.inputs.DEPLOY_TAG_TYPE }}" ]]; then echo "KERNEL_TAG=${{ github.event.inputs.DEPLOY_TAG_TYPE }}"  >> $GITHUB_ENV;fi
 
     - name: Building Kernel..
       run: |
