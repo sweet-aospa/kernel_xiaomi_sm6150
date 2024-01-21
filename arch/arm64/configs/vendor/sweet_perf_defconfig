@@ -1302,6 +1302,12 @@ CONFIG_MAY_USE_DEVLINK=y
 CONFIG_HAVE_EBPF_JIT=y
 
 #
+# KernelSU
+#
+CONFIG_KSU=y
+# CONFIG_KSU_DEBUG is not set
+
+#
 # Device Drivers
 #
 CONFIG_ARM_AMBA=y
